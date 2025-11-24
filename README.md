@@ -24,3 +24,20 @@ Utiliza la librería **rembg** (basada en el modelo U^2-Net) y está optimizada 
 ├── .env                   # Variables de entorno (NO subir al repo)
 └── models/
     └── u2net.onnx         # Modelo de IA (Debe descargarse manualmente)
+
+# Ejecutar la lambda localmente
+curl -X POST "http://localhost:9000/2015-03-31/functions/function/invocations" \
+     -d @event.json
+
+#Local development, use watch to hot reload
+docker compose up
+
+#Build and deploy
+docker build --platform linux/amd64 -t rembg-lambda .
+
+docker tag rembg-lambda:latest [123456789012.dkr.ecr.us-east-1.amazonaws.com/rembg-lambda:latest](https://123456789012.dkr.ecr.us-east-1.amazonaws.com/rembg-lambda:latest)
+
+docker push [123456789012.dkr.ecr.us-east-1.amazonaws.com/rembg-lambda:latest](https://123456789012.dkr.ecr.us-east-1.amazonaws.com/rembg-lambda:latest)
+
+aws ecr create-repository --repository-name rembg-lambda
+aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com
