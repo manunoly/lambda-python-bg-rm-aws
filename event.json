@@ -1,0 +1,14 @@
+{
+  "Records": [
+    {
+      "s3": {
+        "bucket": {
+          "name": "nombre-de-tu-bucket-real"
+        },
+        "object": {
+          "key": "carpeta/foto-prueba.jpg"
+        }
+      }
+    }
+  ]
+}

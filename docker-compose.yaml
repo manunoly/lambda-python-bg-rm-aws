@@ -1,0 +1,22 @@
+services:
+  lambda-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rembg-lambda-dev
+    ports:
+      - "9000:8080" # Puerto del emulador Lambda
+    env_file:
+      - .env
+    environment:
+      # Aseguramos ruta correcta en local
+      - U2NET_HOME=/var/task/.u2net 
+    develop:
+      watch:
+        # Si cambias app.py, sincroniza y reinicia el contenedor
+        - action: sync+restart
+          path: ./app.py
+          target: /var/task/app.py
+        # Si cambias requirements, reconstruye la imagen
+        - action: rebuild
+          path: ./requirements.txt

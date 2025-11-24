@@ -1,0 +1,4 @@
+rembg[cpu]==2.0.68
+onnxruntime==1.23.2
+pillow==11.3.0
+boto3=1.41.2
