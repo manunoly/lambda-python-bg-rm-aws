@@ -12,6 +12,7 @@ pip-delete-this-directory.txt
 
 # Environment Variables
 .env
+.env.example
 
 # Models (Large files)
 models/*.onnx
